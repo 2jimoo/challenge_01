@@ -1,0 +1,7 @@
+wifi-info:
+  base-url:
+    "http://openapi.seoul.go.kr:8088"
+  path:
+    "json/TbPublicWifiInfo"
+  token:
+    "4b4e6452486e6d6e37394a45494f65"
