@@ -5,3 +5,30 @@ wifi-info:
     "json/TbPublicWifiInfo"
   token:
     "4b4e6452486e6d6e37394a45494f65"
+
+    # https://secure-key.tistory.com/56
+    # create 기존테이블 삭제 후 재 생성
+    # create-drop create와 같으나 종료시점에 테이블 drop
+    # update 변경된 부분만 반영
+    # validate 엔티티와 테이블이 정상적으로 매핑되었는지 확인
+  # none 사용하지 않음
+
+# 1. local에 mysql 설치
+# 2. local 터미널에서 mysql 실행 후 디비 생성 (spring.datasource.url 의 test를 생성한 디비명으로 치환)
+# 3. 설치당시 입력한 root(username)의 password 치환
+# jpa.database-platform, spring.datasource.driver-class-name가 선택해서 쓰는 거라 아래로 맞추는 게 좋음
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: 12345678
+  jpa:
+    database: mysql   # 추가 해준 부분
+    database-platform: org.hibernate.dialect.MySQLDialect # 추가 해준 부분
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
