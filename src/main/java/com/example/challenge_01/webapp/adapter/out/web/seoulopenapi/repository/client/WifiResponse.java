@@ -1,4 +1,4 @@
-package com.example.challenge_01.webapp.adapter.out.web.seoulopenapi.client;
+package com.example.challenge_01.webapp.adapter.out.web.seoulopenapi.repository.client;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

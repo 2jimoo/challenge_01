@@ -2,6 +2,7 @@ package com.example.challenge_01.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.locationtech.jts.geom.Point;
 
 @Data
 @AllArgsConstructor
@@ -11,7 +12,6 @@ public class WifiInfo {
     private String managementNumber;
     private String autonomousRegion;
     private String roadNameAddress;
-    private Double yCoordLat;
-    private Double xCoordLnt;
+    private Point coordinate;
 
 }

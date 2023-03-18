@@ -6,6 +6,8 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.locationtech.jts.geom.Point;
+
 
 @Data
 @NoArgsConstructor
@@ -23,8 +25,6 @@ public class WifiInfoEntity {
     @Column
     private String roadNameAddress;
     @Column
-    private Double yCoordLat;
-    @Column
-    private Double xCoordLnt;
+    private Point coordinate;
 
 }
