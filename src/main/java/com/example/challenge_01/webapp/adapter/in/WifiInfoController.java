@@ -20,19 +20,18 @@ public class WifiInfoController {
         return wifiInfoService.list().stream().map(this::mapToViewModel).toList();
     }
 
-    @PostMapping
+    @PostMapping("/-/loadAll")
     public Integer loadAll() {
         return wifiInfoService.loadAll().size();
     }
 
 
-    @GetMapping("/ycoords/{y}/xcoords/{x}")
-    public List<WifiInfoViewModel> searchClosest(@PathVariable Double y, @PathVariable Double x, @RequestParam(defaultValue = "20") Integer size) {
+    @GetMapping("/-/searchByCoord")
+    public List<WifiInfoViewModel> searchClosest(@RequestParam Double y, @RequestParam Double x, @RequestParam(defaultValue = "20") Integer size) {
         return wifiInfoService.searchClosest(y, x, size).stream().map(this::mapToViewModel).toList();
     }
 
     private WifiInfoViewModel mapToViewModel(WifiInfo wifiInfo) {
-        // wifiInfo.getCoordinate().getCoordinate().y
         return new WifiInfoViewModel(wifiInfo.getId(), wifiInfo.getName(), wifiInfo.getCoordinate() != null ? wifiInfo.getCoordinate().toText() : null);
     }
 
