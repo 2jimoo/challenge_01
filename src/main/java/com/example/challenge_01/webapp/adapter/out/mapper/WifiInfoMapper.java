@@ -25,7 +25,7 @@ public class WifiInfoMapper {
     public WifiInfo mapToWifiInfo(WifiInfoResponseContentRow content) {
         // X_SWIFI_MGR_NO is key?
 
-        String pointWKT = String.format("POINT(%s %s)", content.LAT(), content.LNT());
+        String pointWKT = String.format("POINT(%s %s)", content.LNT(), content.LAT()); //PONT(경도x, 위도y)
         Point point;
         try {
             point = (Point) new WKTReader().read(pointWKT);

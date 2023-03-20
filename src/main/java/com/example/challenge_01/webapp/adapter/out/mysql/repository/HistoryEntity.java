@@ -17,15 +17,15 @@ import java.time.Instant;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class HistoryEntity {
+    @Id
+    private String historyId;
+    @Column
+    private Point coordinateSearched;
     @Column
     @CreatedDate
     Instant searchedAt;
     @Column
     @Version
     Long version;
-    @Id
-    private String historyId;
-    @Column
-    private Point coordinateSearched;
 
 }

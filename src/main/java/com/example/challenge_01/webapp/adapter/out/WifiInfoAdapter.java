@@ -22,7 +22,6 @@ public class WifiInfoAdapter implements PersistWifiInfoPort, FindAllClosestWifiP
     private final WifiInfoResponseContentRepository wifiInfoResponseContentRepository;
     private final WifiInfoRepository wifiInfoRepository;
     private final WifiInfoMapper wifiInfoMapper;
-
     private final EntityManager entityManager;
 
     @Override
@@ -41,7 +40,7 @@ public class WifiInfoAdapter implements PersistWifiInfoPort, FindAllClosestWifiP
     public List<WifiInfo> findClosest(double y, double x, int size) {
         // 쿼리
         //https://stackoverflow.com/questions/49372146/find-the-nearest-point-from-a-given-point-in-mysql
-        String currentLocation = "POINT(%s, %s)".formatted(y, x);
+        String currentLocation = "POINT(%s, %s)".formatted(x,y);
         String sqlString = "SELECT p.*, ST_DISTANCE( %s, p.coordinate) as dist FROM wifi_info_entity p ORDER BY dist LIMIT %s".formatted(currentLocation, size);
         Query query = entityManager.createNativeQuery(sqlString, WifiInfoEntity.class);
 

@@ -6,20 +6,19 @@ wifi-info:
   token:
     "4b4e6452486e6d6e37394a45494f65"
 
-    # https://secure-key.tistory.com/56
-    # create 기존테이블 삭제 후 재 생성
-  # create-drop create와 같으나 종료시점에 테이블 drop
-  # update 변경된 부분만 반영
-  # validate 엔티티와 테이블이 정상적으로 매핑되었는지 확인
-  # none 사용하지 않음
 
-# 1. local에 mysql 설치
-# 2. local 터미널에서 mysql 실행 후 디비 생성 (spring.datasource.url 의 test를 생성한 디비명으로 치환)
-# 3. 설치당시 입력한 root(username)의 password 치환
-# jpa.database-platform, spring.datasource.driver-class-name가 선택해서 쓰는 거라 아래로 맞추는 게 좋음
-
-# mysql 공간좌표 필드 사용하기 https://momentjin.tistory.com/136
+#https://devlog-wjdrbs96.tistory.com/199
+#위와 같이 view 이름 predix, suffix에 붙는 것들을 설정할 수 있다.
+# prefix는 앞에 폴더의 경로이고 suffix는 확장자
+# 컨트롤러에서 string 리턴할 경우 prefix의 경로가 붙고 뒤에는 suffix가 붙어서 jsp 페이지를 연결하게 된다.
+# 보통 jsp는 안 쓰고 Thymeleaf 사용
+# @RestController는 html을 사용. jsp를 파싱할때는 @Controller로 바꿔줘야한다.
+# 뷰생성 https://shallow-learning.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-6-Spring-MVC-View-%EB%A7%8C%EB%93%A4%EA%B8%B0-JSP%EC%99%80-Thymeleaf
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&characterEncoding=UTF-8
