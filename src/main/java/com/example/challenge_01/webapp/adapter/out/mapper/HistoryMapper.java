@@ -12,6 +12,6 @@ public class HistoryMapper {
     }
 
     public HistoryEntity mapToHistoryEntity(History history) {
-        return new HistoryEntity(history.getHistoryId(), history.getCoordinateSearched(), history.getSearchedAt(), history.getVersion());
+        return new HistoryEntity(history.getId(), history.getCoordinateSearched(), history.getSearchedAt(), history.getVersion());
     }
 }

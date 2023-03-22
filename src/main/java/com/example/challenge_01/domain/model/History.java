@@ -14,15 +14,15 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class History {
-    private String historyId;
+    private String id;
     private Point coordinateSearched;
     private Instant searchedAt;
     private Long version;
 
     public static History of(double y, double x) {
         History history = new History();
-        history.setHistoryId(UUID.randomUUID().toString());
-        String pointWKT = String.format("POINT(%s %s)", y, x);
+        history.setId(UUID.randomUUID().toString());
+        String pointWKT = String.format("POINT(%s %s)", x, y);
         try {
             history.setCoordinateSearched((Point) new WKTReader().read(pointWKT));
         } catch (ParseException e) {

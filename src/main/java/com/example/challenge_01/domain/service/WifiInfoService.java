@@ -19,7 +19,7 @@ public class WifiInfoService {
     private final PersistWifiInfoPort persistWifiInfoPort;
     private final FindAllClosestWifiPort findAllClosestWifiPort;
 
-    private final PersistHistoryPort persistHistoryPort;
+    private final HistoryService historyService;
 
     public List<WifiInfo> list() {
         return findAllWifiInfoFromSeoulOpenApiPort.findAll();
@@ -34,7 +34,7 @@ public class WifiInfoService {
     @Transactional
     public List<WifiInfo> searchClosest(double y, double x, int size) {
         History history = History.of(y, x);
-        persistHistoryPort.persist(history);
+        historyService.persist(history);
         return findAllClosestWifiPort.findClosest(y, x, size);
     }
 }

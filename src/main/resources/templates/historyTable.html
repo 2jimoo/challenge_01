@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <style>
+        #histories {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #histories td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #histories tr:nth-child(even){background-color: #f2f2f2;}
+
+        #histories tr:hover {background-color: #ddd;}
+
+        #histories th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+    <title>History Table</title>
+</head>
+<body>
+
+<h1>History Table</h1>
+
+<table id="histories">
+    <tr>
+        <th>Id</th>
+        <th>Searched At</th>
+        <th>Y</th>
+        <th>X</th>
+    </tr>
+    <tr th:each="history: ${histories}">
+        <td th:text="${history.getId()}"></td>
+        <td th:text="${history.getSearchedAt()}"></td>
+        <td th:text="${history.getCoordinateSearched().getY()}"></td>
+        <td th:text="${history.getCoordinateSearched().getX()}"></td>
+    </tr>
+</table>
+</body>
+</html>
+
+

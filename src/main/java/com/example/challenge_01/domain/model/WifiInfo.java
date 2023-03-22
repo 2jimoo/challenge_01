@@ -13,5 +13,4 @@ public class WifiInfo {
     private String autonomousRegion;
     private String roadNameAddress;
     private Point coordinate;
-
 }

@@ -21,7 +21,7 @@ public class HistoryController {
     @GetMapping
     public Page<HistoryViewModel> list(@PageableDefault Pageable pageable, ZoneId zoneId) {
         return historyService.findAll(pageable)
-                .map(e -> new HistoryViewModel(e.getHistoryId(), e.getSearchedAt().atZone(zoneId), e.getCoordinateSearched().getY(),
+                .map(e -> new HistoryViewModel(e.getId(), e.getSearchedAt().atZone(zoneId), e.getCoordinateSearched().getY(),
                         e.getCoordinateSearched().getX()));
         // Coordinate x,y,z,w 순서 저장
     }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <style>
+        #wifiInfos {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #wifiInfos td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #wifiInfos tr:nth-child(even){background-color: #f2f2f2;}
+
+        #wifiInfos tr:hover {background-color: #ddd;}
+
+        #wifiInfos th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+    <title>WIFI Info Table</title>
+</head>
+<body>
+<h1>WIFI Info Table</h1>
+<table id="wifiInfos">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>ManagementNumber</th>
+        <th>Region</th>
+        <th>Address</th>
+        <th>Y</th>
+        <th>X</th>
+    </tr>
+    <tr th:each="wifiInfo: ${wifiInfos}">
+        <td th:text="${wifiInfo.getId()}"></td>
+        <td th:text="${wifiInfo.getName()}"></td>
+        <td th:text="${wifiInfo.getManagementNumber()}"></td>
+        <td th:text="${wifiInfo.getAutonomousRegion()}"></td>
+        <td th:text="${wifiInfo.getRoadNameAddress()}"></td>
+        <td th:text="${wifiInfo.getCoordinate().getY()}"></td>
+        <td th:text="${wifiInfo.getCoordinate().getX()}"></td>
+    </tr>
+</table>
+</body>
+</html>
+
+
