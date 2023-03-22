@@ -4,6 +4,9 @@ import com.example.challenge_01.domain.model.WifiInfo;
 import com.example.challenge_01.domain.service.ViewModelService;
 import com.example.challenge_01.domain.service.WifiInfoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +21,12 @@ import java.util.List;
 public class WifiInfoViewController {
     private final WifiInfoService wifiInfoService;
     private final ViewModelService viewModelService;
+
+    @GetMapping
+    public ModelAndView list(@PageableDefault(size = 20)Pageable pageable){
+        List<WifiInfo> wifiInfos= wifiInfoService.list(pageable).getContent();
+        return viewModelService.listWifiInfoViewModel(wifiInfos);
+    }
 
     @GetMapping("/-/loadAll")
     public ModelAndView loadAll() {

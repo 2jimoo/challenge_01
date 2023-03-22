@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Load All</title>
+
 </head>
 <body>
-<p th:text="${total}개의 WIFI정보를 정상적으로 저장하였습니다"></p>
-<div>홈으로 가기</div>
+<div style="text-align:center">
+    <h1><span th:text="${total}"></span>개의 WIFI정보를 정상적으로 저장하였습니다</h1>
+    <a th:href="@{/view/wifiInfos}">홈으로 가기</a>
+</div>
 </body>
 </html>

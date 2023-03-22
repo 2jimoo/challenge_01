@@ -3,6 +3,7 @@ package com.example.challenge_01.webapp.adapter.out;
 import com.example.challenge_01.domain.model.WifiInfo;
 import com.example.challenge_01.domain.port.FindAllClosestWifiPort;
 import com.example.challenge_01.domain.port.FindAllWifiInfoFromSeoulOpenApiPort;
+import com.example.challenge_01.domain.port.FindAllWifiInfoPort;
 import com.example.challenge_01.domain.port.PersistWifiInfoPort;
 import com.example.challenge_01.webapp.adapter.out.mapper.WifiInfoMapper;
 import com.example.challenge_01.webapp.adapter.out.mysql.repository.WifiInfoEntity;
@@ -11,13 +12,15 @@ import com.example.challenge_01.webapp.adapter.out.web.seoulopenapi.repository.W
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class WifiInfoAdapter implements PersistWifiInfoPort, FindAllClosestWifiPort, FindAllWifiInfoFromSeoulOpenApiPort {
+public class WifiInfoAdapter implements PersistWifiInfoPort, FindAllClosestWifiPort, FindAllWifiInfoFromSeoulOpenApiPort, FindAllWifiInfoPort {
 
     private final WifiInfoResponseContentRepository wifiInfoResponseContentRepository;
     private final WifiInfoRepository wifiInfoRepository;
@@ -51,5 +54,10 @@ public class WifiInfoAdapter implements PersistWifiInfoPort, FindAllClosestWifiP
     @Override
     public List<WifiInfo> findAll() {
         return wifiInfoResponseContentRepository.findAll().stream().map(wifiInfoMapper::mapToWifiInfo).toList();
+    }
+
+    @Override
+    public Page<WifiInfo> findAll(Pageable pageable) {
+        return wifiInfoRepository.findAll(pageable).map(wifiInfoMapper::mapToWifiInfo);
     }
 }

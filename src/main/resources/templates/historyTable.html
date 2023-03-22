@@ -13,9 +13,13 @@
             padding: 8px;
         }
 
-        #histories tr:nth-child(even){background-color: #f2f2f2;}
+        #histories tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
-        #histories tr:hover {background-color: #ddd;}
+        #histories tr:hover {
+            background-color: #ddd;
+        }
 
         #histories th {
             padding-top: 12px;
@@ -24,27 +28,51 @@
             background-color: #04AA6D;
             color: white;
         }
+        .flex-box {
+            display: flex;
+        }
     </style>
     <title>History Table</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
-<h1>History Table</h1>
-
+<h1>위치 히스토리 목록</h1>
+<div class="flex-box">
+    <a th:href="@{/view/wifiInfos}">홈</a><span>|</span>
+    <a th:href="@{/view/histories}">위치 히스토리 목록</a><span>|</span>
+    <a th:href="@{/view/wifiInfos/-/loadAll}">Open API 정보 가져오기</a>
+</div>
 <table id="histories">
     <tr>
         <th>Id</th>
         <th>Searched At</th>
         <th>Y</th>
         <th>X</th>
+        <th>비고</th>
     </tr>
     <tr th:each="history: ${histories}">
         <td th:text="${history.getId()}"></td>
         <td th:text="${history.getSearchedAt()}"></td>
         <td th:text="${history.getCoordinateSearched().getY()}"></td>
         <td th:text="${history.getCoordinateSearched().getX()}"></td>
+        <td>
+            <button th:onclick="deleteHistory([[${history.getId()}]])">삭제</button>
+        </td>
     </tr>
 </table>
+<script th:inline="javascript">
+    function deleteHistory(id){
+        console.log(id)
+        const request = new XMLHttpRequest();
+        request.open('DELETE', 'http://localhost:8080/view/histories/' + id);
+        request.send();
+        request.onload = function() {
+            console.log("success!")
+            window.location.href = "/view/histories";
+        }
+    }
+</script>
 </body>
 </html>
 

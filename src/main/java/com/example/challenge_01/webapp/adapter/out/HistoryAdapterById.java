@@ -1,6 +1,7 @@
 package com.example.challenge_01.webapp.adapter.out;
 
 import com.example.challenge_01.domain.model.History;
+import com.example.challenge_01.domain.port.DeleteHistoryByIdPort;
 import com.example.challenge_01.domain.port.FindAllHistoryPort;
 import com.example.challenge_01.domain.port.PersistHistoryPort;
 import com.example.challenge_01.webapp.adapter.out.mapper.HistoryMapper;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class HistoryAdapter implements PersistHistoryPort, FindAllHistoryPort {
+public class HistoryAdapterById implements PersistHistoryPort, FindAllHistoryPort, DeleteHistoryByIdPort {
     private final HistoryRepository historyRepository;
 
     private final HistoryMapper historyMapper;
@@ -25,5 +26,10 @@ public class HistoryAdapter implements PersistHistoryPort, FindAllHistoryPort {
     @Override
     public History persist(History history) {
         return historyMapper.mapToHistory(historyRepository.save(historyMapper.mapToHistoryEntity(history)));
+    }
+
+    @Override
+    public void deleteById(String id) {
+        historyRepository.deleteById(id);
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Map;
 
 //https://shallow-learning.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-6-Spring-MVC-View-%EB%A7%8C%EB%93%A4%EA%B8%B0-JSP%EC%99%80-Thymeleaf
 @Service
@@ -21,7 +20,7 @@ public class ViewModelService {
     }
 
     public ModelAndView listWifiInfoViewModel(List<WifiInfo> wifiInfos){
-        ModelAndView mav = new ModelAndView("wifiTable");
+        ModelAndView mav = new ModelAndView("index");
         mav.addObject("wifiInfos",wifiInfos);
         return mav;
     }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <style>
+        #wifiInfos {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #wifiInfos td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #wifiInfos tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #wifiInfos tr:hover {
+            background-color: #ddd;
+        }
+
+        #wifiInfos th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        .flex-box {
+            display: flex;
+        }
+    </style>
+    <title>WIFI Info Table</title>
+</head>
+<body>
+<h1>와이파이 정보 구하기</h1>
+<div class="flex-box">
+    <a th:href="@{/view/wifiInfos}">홈</a><span>|</span>
+    <a th:href="@{/view/histories}">위치 히스토리 목록</a><span>|</span>
+    <a th:href="@{/view/wifiInfos/-/loadAll}">Open API 정보 가져오기</a>
+</div>
+<div>
+    <span>LAT: <span id="LAT"></span>LNT: <span id="LNT"></span></span>
+    <span><button th:onclick="getMyPosition()">내 위치 가져오기</button></span>
+    <span><button th:onclick="getClosestWifiInfos()">근처 WIFI 정보보기</button></span>
+</div>
+<table id="wifiInfos">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>ManagementNumber</th>
+        <th>Region</th>
+        <th>Address</th>
+        <th>Y</th>
+        <th>X</th>
+    </tr>
+    <tr th:each="wifiInfo: ${wifiInfos}">
+        <td th:text="${wifiInfo.getId()}"></td>
+        <td th:text="${wifiInfo.getName()}"></td>
+        <td th:text="${wifiInfo.getManagementNumber()}"></td>
+        <td th:text="${wifiInfo.getAutonomousRegion()}"></td>
+        <td th:text="${wifiInfo.getRoadNameAddress()}"></td>
+        <td th:text="${wifiInfo.getCoordinate().getY()}"></td>
+        <td th:text="${wifiInfo.getCoordinate().getX()}"></td>
+    </tr>
+</table>
+
+<script th:inline="javascript">
+    function getMyPosition(){
+        var geoSuccess = function(position) {
+            startPos = position;
+            document.getElementById('LAT').innerHTML = startPos.coords.latitude;
+            document.getElementById('LNT').innerHTML = startPos.coords.longitude;
+            document.getElementById('LAT').value = startPos.coords.latitude;
+            document.getElementById('LNT').value = startPos.coords.longitude;
+            console.log(`LAT: ${LAT.value} LNT: ${LNT.value}.`)
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+    }
+    function getClosestWifiInfos(){
+        const lat =document.getElementById('LAT').value
+        const lnt = document.getElementById('LNT').value
+        if (lat !== undefined && lnt !== undefined){
+            const routingUrl= "/view/wifiInfos/-/searchByCoord?y="+lnt+"&x="+lat
+            console.log(routingUrl)
+            window.location.href = routingUrl
+        }
+    }
+</script>
+</body>
+</html>
+
+
